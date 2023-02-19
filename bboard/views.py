@@ -6,4 +6,6 @@ from .models import Bb
 # Create your views here.
 def index(request):
     template = loader.get_template('bboard/index.html')
-    return HttpResponse(s, content_type='text/plain; charset=utf-8')
+    bbs = Bb.objects.order_by('-published')
+    context = {'bbs': bbs}
+    return HttpResponse(template.render(context, request))
